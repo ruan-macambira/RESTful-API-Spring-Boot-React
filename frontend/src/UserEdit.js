@@ -1,40 +1,19 @@
-import { Component, useEffect, useState } from "react"
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { Link, useNavigate,useParams} from "react-router-dom"
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap'
 import AppNavBar from './AppNavBar'
 
-
-import {
-    useLocation,
-    useNavigate,
-    useParams,
-  } from "react-router-dom";
-  
-function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
-        return (
-        <Component
-            {...props}
-            router={{ location, navigate, params }}
-        />
-        );
-    }
-
-    return ComponentWithRouterProp;
-}
 
 function UserEdit(props) {
     const emptyItem = { nome: "", nomeMae: "" }
     const [item, setItem] = useState(emptyItem)
     const navigate = useNavigate()
+    const params = useParams()
 
     useEffect(() => {
         async function fetchData() {
-            if(props.router.params.id !== 'new') {
-                const response = await fetch(`/usuarios/${props.router.params.id}`)
+            if(params.id !== 'new') {
+                const response = await fetch(`/usuarios/${params.id}`)
                 const user = await response.json()
                 setItem(user)
             }
@@ -92,4 +71,4 @@ function UserEdit(props) {
     )
 }
 
-export default withRouter(UserEdit)
+export default UserEdit
