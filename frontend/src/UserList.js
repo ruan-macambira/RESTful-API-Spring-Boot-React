@@ -23,7 +23,7 @@ class UserList extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(() => {
-            const updatedUsers = [...this.state.users].filter(i => i.id != id)
+            const updatedUsers = [...this.state.users].filter(i => i.id !== id)
             this.setState({users: updatedUsers})
         })
     }
