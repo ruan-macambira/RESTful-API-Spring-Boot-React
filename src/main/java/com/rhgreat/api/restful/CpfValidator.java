@@ -12,7 +12,7 @@ public class CpfValidator implements ConstraintValidator<CpfValidoConstraint, St
 
     @Override
     public boolean isValid(String cpfField, ConstraintValidatorContext cxt) {
-        if(cpfField.length() != 11) return false;
+        if(cpfField == null || cpfField.length() != 11) return false;
 
         char[] cpf = cpfField.toCharArray();
         int[] digits = new int[11];

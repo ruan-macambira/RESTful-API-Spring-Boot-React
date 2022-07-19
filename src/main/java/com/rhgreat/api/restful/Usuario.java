@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 @Entity
 class Usuario {
@@ -21,11 +21,11 @@ class Usuario {
     private String nomeMae;
 
     @NotBlank
-    @Size(min = 11, max = 11)
     @CpfValidoConstraint
     private String cpf;
 
     @NotBlank
+    @Pattern(regexp = "^[0-9]+$")
     private String rg;
 
     private Date dataNascimento;

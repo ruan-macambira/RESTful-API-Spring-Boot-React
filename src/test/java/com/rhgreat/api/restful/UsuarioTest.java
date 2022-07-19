@@ -1,6 +1,5 @@
 package com.rhgreat.api.restful;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -76,6 +75,15 @@ public class UsuarioTest {
         usuario.setRg("");
 
         Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
-        assertEquals(violations.size(), 1);
+        assertFalse(violations.isEmpty());
+    }
+
+    @Test
+    public void RgOnlyAcceptDigits() {
+        Usuario usuario = validUser();
+        usuario.setRg("111111111111a");
+
+        Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
+        assertFalse(violations.isEmpty());
     }
 }
