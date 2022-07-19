@@ -69,5 +69,4 @@ public class UsuarioControllerTest {
                 .content(toJSON(usuario))
         ).andExpect(status().isBadRequest());
     }
-    
 }
