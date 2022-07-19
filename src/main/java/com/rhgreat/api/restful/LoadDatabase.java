@@ -1,5 +1,7 @@
 package com.rhgreat.api.restful;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -13,8 +15,11 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(UsuarioRepository repository) {
         return args -> {
-            log.info("Preloading " + repository.save(new Usuario("Jerônimo", "Silvana", "11111111111", "111111111111")));
-            log.info("Preloading " + repository.save(new Usuario("Josias", "Roberta", "22222222222", "111111111111")));
+            long ms = new Date().getTime();
+            java.sql.Date date = new java.sql.Date(ms);
+
+            log.info("Preloading " + repository.save(new Usuario("Jerônimo", "Silvana", "11111111111", "111111111111", date)));
+            log.info("Preloading " + repository.save(new Usuario("Josias", "Roberta", "22222222222", "111111111111", date)));
         };
     }
 }

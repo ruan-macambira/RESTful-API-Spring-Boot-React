@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 class Usuario {
@@ -28,16 +31,20 @@ class Usuario {
     @Pattern(regexp = "^[0-9]+$")
     private String rg;
 
+    @NotNull
     private Date dataNascimento;
+
+    @CreationTimestamp
     private Date dataCadastro;
 
     Usuario() {}
 
-    Usuario(String nome, String nomeMae, String cpf, String rg) {
+    Usuario(String nome, String nomeMae, String cpf, String rg, Date dataNascimento) {
         this.nome = nome;
         this.nomeMae = nomeMae;
         this.cpf = cpf;
         this.rg = rg;
+        this.dataNascimento = dataNascimento;
     }
 
     public Long getId() {

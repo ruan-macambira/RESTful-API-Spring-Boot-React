@@ -42,6 +42,7 @@ public class UsuarioControllerTest {
         usuarioJSON.put("nomeMae", usuario.getNomeMae());
         usuarioJSON.put("cpf", usuario.getCpf());
         usuarioJSON.put("rg", usuario.getRg());
+        usuarioJSON.put("dataNascimento", usuario.getDataNascimento());
 
         return usuarioJSON.toString();
     }

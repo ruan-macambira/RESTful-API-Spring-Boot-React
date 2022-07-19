@@ -1,5 +1,6 @@
 package com.rhgreat.api.restful;
 
+import java.sql.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SharedMethods {
@@ -9,8 +10,14 @@ public class SharedMethods {
         usuario.setNomeMae("Nome Mãe");
         usuario.setCpf(gerarCpfValido());
         usuario.setRg("11111111111111");
+        usuario.setDataNascimento(today());
         
         return usuario;
+    }
+
+    private static Date today() {
+        long ms = new java.util.Date().getTime();
+        return new Date(ms);
     }
 
     public static String gerarCpfValido() {
