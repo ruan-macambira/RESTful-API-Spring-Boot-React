@@ -7,7 +7,7 @@ public class SharedMethods {
         Usuario usuario = new Usuario();
         usuario.setNome("Nome");
         usuario.setNomeMae("Nome Mãe");
-        usuario.setCpf("11111111111");
+        usuario.setCpf(gerarCpfValido());
         usuario.setRg("11111111111111");
         
         return usuario;
