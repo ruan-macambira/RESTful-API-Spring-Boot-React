@@ -33,13 +33,7 @@ public class UsuarioControllerTest {
     }
 
     public Usuario validUser() {
-        Usuario usuario = new Usuario();
-        usuario.setNome("Nome");
-        usuario.setNomeMae("Nome Mãe");
-        usuario.setCpf("11111111111");
-        usuario.setRg("11111111111111");
-        
-        return usuario;
+        return SharedMethods.validUser();
     }
 
     public String toJSON(Usuario usuario) throws JSONException {

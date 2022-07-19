@@ -1,6 +1,7 @@
 package com.rhgreat.api.restful;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -17,13 +18,7 @@ public class UsuarioTest {
     private Validator validator;
 
     public Usuario validUser() {
-        Usuario usuario = new Usuario();
-        usuario.setNome("Nome");
-        usuario.setNomeMae("Nome Mãe");
-        usuario.setCpf("11111111111");
-        usuario.setRg("11111111111111");
-        
-        return usuario;
+        return SharedMethods.validUser();
     }
 
     @BeforeEach
@@ -46,7 +41,7 @@ public class UsuarioTest {
         usuario.setNome("");
 
         Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
-        assertEquals(violations.size(), 1);
+        assertFalse(violations.isEmpty());
     }
 
     @Test
@@ -55,7 +50,7 @@ public class UsuarioTest {
         usuario.setNomeMae("");
 
         Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
-        assertEquals(violations.size(), 1);
+        assertFalse(violations.isEmpty());
     }
 
     @Test
@@ -64,7 +59,15 @@ public class UsuarioTest {
         usuario.setCpf("");
 
         Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
-        assertEquals(violations.size(), 1);
+        assertFalse(violations.isEmpty());
+    }
+
+    @Test void InvalidCPFIsInvalid() {
+        Usuario usuario = validUser();
+        usuario.setCpf(SharedMethods.gerarCpfInvalido());
+
+        Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
+        assertFalse(violations.isEmpty());
     }
 
     @Test
