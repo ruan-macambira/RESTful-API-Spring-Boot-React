@@ -4,8 +4,8 @@ import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap'
 import AppNavBar from './AppNavBar'
 
 
-function UserEdit(props) {
-    const emptyItem = { nome: "", nomeMae: "" }
+function UserEdit() {
+    const emptyItem = { nome: "", nomeMae: "" , cpf: "", rg: ""}
     const [item, setItem] = useState(emptyItem)
     const [errors, setErrors] = useState({})
     const navigate = useNavigate()
@@ -22,6 +22,12 @@ function UserEdit(props) {
         fetchData()
     })
 
+    const eraseErrors = name => {
+        const newErrors = {...errors}
+        newErrors[name] = null
+        setErrors(newErrors)
+    }
+
     const handleChange = event => {
         const {target: {value, name}} = event
 
@@ -29,9 +35,7 @@ function UserEdit(props) {
         newItem[name] = value
         setItem(newItem)
 
-        const newErrors = {...errors}
-        newErrors[name] = null
-        setErrors(newErrors)
+        eraseErrors(name)
     }
 
     const handleSubmit = async event => {
@@ -80,15 +84,21 @@ function UserEdit(props) {
                     </FormGroup>
                     <FormGroup>
                         <Label for="cpf">CPF</Label>
-                        <Input type="text" pattern="[0-9]" name="cpf" id="cpf" invalid={errors.cpf} value={item.cpf ?? ''} required={true}
+                        <Input type="text" pattern="[0-9]{11}" name="cpf" id="cpf" invalid={errors.cpf} value={item.cpf ?? ''} required={true}
                                onChange={handleChange}/>
                         <div className="invalid-feedback">{errors.cpf}</div>
                     </FormGroup>
                     <FormGroup>
                         <Label for="rg">RG</Label>
-                        <Input type="text" pattern="[0-9]" name="rg" id="rg" invalid={errors.rg} value={item.rg ?? ''} required={true}
+                        <Input type="text" pattern="[0-9]+" name="rg" id="rg" invalid={errors.rg} value={item.rg ?? ''} required={true}
                                onChange={handleChange}/>
                         <div className="invalid-feedback">{errors.rg}</div>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="dataNascimento">Data de Nascimento</Label>
+                        <Input type="date" name="dataNascimento" id="dataNascimento" invalid={errors.dataNascimento} value={item.dataNascimento ?? ''} required={true}
+                               onChange={handleChange}/>
+                        <div className="invalid-feedback">{errors.dataNascimento}</div>
                     </FormGroup>
                     <FormGroup>
                         <Button color="primary" type="submit">Confirmar</Button>

@@ -3,6 +3,11 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap'
 import AppNavBar from './AppNavBar'
 import {Link} from 'react-router-dom'
 
+function cpfMask(cpf) {
+    const [a,b,c,d] = cpf.match(/.{1,3}/g)
+    return `${a}.${b}.${c}-${d}`
+}
+
 class UserList extends Component {
     constructor(props) {
         super(props)
@@ -35,10 +40,14 @@ class UserList extends Component {
             return <p> Loading... </p>
         }
 
-        const usersList = users.map(({id, nome, nomeMae}) => {
+        const usersList = users.map((user) => {
+            const {id, nome, nomeMae, dataNascimento, cpf, rg} = user
             return <tr key={id}>
                 <td>{nome}</td>
                 <td>{nomeMae}</td>
+                <td>{dataNascimento}</td>
+                <td>{cpfMask(cpf)}</td>
+                <td>{rg}</td>
                 <td>
                     <ButtonGroup>
                         <Button size="sm" color="primary" tag={Link} to={`/usuarios/${id}`}>Editar</Button>
@@ -59,9 +68,12 @@ class UserList extends Component {
                     <Table className="mt-4">
                         <thead>
                             <tr>
-                                <th width="30%">Nome</th>
-                                <th width="30%">Nome da Mãe</th>
-                                <th width="40%">Ações</th>
+                                <th>Nome</th>
+                                <th>Nome da Mãe</th>
+                                <th>Data de Nascimento</th>
+                                <th>CPF</th>
+                                <th>RG</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>{usersList}</tbody>
