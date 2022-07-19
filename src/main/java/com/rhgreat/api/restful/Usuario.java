@@ -6,15 +6,25 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 class Usuario {
     
     private @Id @GeneratedValue Long id;
+
+    @NotBlank
     private String nome;
+
+    @NotBlank
     private String nomeMae;
+
+    @NotBlank
     private String cpf;
+
+    @NotBlank
     private String rg;
+
     private Date dataNascimento;
     private Date dataCadastro;
 
@@ -91,7 +101,13 @@ class Usuario {
             return false;
         }
         Usuario usuario = (Usuario) o;
-        return Objects.equals(id, usuario.id) && Objects.equals(nome, usuario.nome) && Objects.equals(nomeMae, usuario.nomeMae) && Objects.equals(cpf, usuario.cpf) && Objects.equals(rg, usuario.rg) && Objects.equals(dataNascimento, usuario.dataNascimento) && Objects.equals(dataCadastro, usuario.dataCadastro);
+        return Objects.equals(id, usuario.id)
+            && Objects.equals(nome, usuario.nome)
+            && Objects.equals(nomeMae, usuario.nomeMae)
+            && Objects.equals(cpf, usuario.cpf)
+            && Objects.equals(rg, usuario.rg)
+            && Objects.equals(dataNascimento, usuario.dataNascimento)
+            && Objects.equals(dataCadastro, usuario.dataCadastro);
     }
 
     @Override

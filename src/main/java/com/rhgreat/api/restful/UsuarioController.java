@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 @RestController
 public class UsuarioController {
     private final UsuarioRepository repository;
@@ -39,7 +41,7 @@ public class UsuarioController {
     // end::get-aggregate-root[]
 
     @PostMapping("/usuarios")
-    ResponseEntity<?> newUsuario(@RequestBody Usuario newUsuario) {
+    ResponseEntity<?> newUsuario(@RequestBody @Valid Usuario newUsuario) {
         EntityModel<Usuario> entityModel = assembler.toModel(repository.save(newUsuario));
 
         return ResponseEntity
