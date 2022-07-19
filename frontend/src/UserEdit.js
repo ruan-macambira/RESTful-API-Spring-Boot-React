@@ -20,7 +20,7 @@ function UserEdit() {
             }
         }
         fetchData()
-    })
+    }, [params.id])
 
     const eraseErrors = name => {
         const newErrors = {...errors}
