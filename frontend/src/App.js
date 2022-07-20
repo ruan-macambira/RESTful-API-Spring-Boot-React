@@ -2,7 +2,6 @@ import { Component } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css';
 
-import Home from './Home'
 import UserList from './UserList'
 import UserEdit from './UserEdit'
 
@@ -21,7 +20,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path='/' exact={true} element={<Home />} />
+          <Route path='/' exact={true} element={<UserList />} />
           <Route path='usuarios' exact={true} element={<UserList />} />
           <Route path='usuarios/:id' element={<UserEdit/>} />
         </Routes>
